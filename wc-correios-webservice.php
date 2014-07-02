@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Correios Webservice
  * Plugin URI: https://github.com/voltsdigital/wocommerce-correios-offline
  * Description: Correios Webservice para Woocommerce/WooCommerce
- * Author: Ricardo Haas
+ * Author: Ricardo Haas @voltsdigital
  * Author URI: https://github.com/ricardohaas
  * Version: 0.0.1
  * License: GPLv2 or later
@@ -48,10 +48,9 @@ function wcorreios_webservice_load() {
 	 * Load textdomain.
 	 */
 	load_plugin_textdomain( 'wcorreios_webservice', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
 	// WC_Correios_Webservice class.
-	include_once WOO_CORREIOS_WEBSERVICE_PATH . 'includes/class-wc-correios-webservice.php';
-
 }
-
+include_once WOO_CORREIOS_WEBSERVICE_PATH . 'includes/class-wc-correios-webservice.php';
+$wp_correios_webservice = new WP_Correios_Webservice;
+register_activation_hook( __FILE__, array( $wp_correios_webservice, 'install' ) );
 add_action( 'plugins_loaded', 'wcorreios_webservice_load', 0 );
